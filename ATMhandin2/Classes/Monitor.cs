@@ -28,7 +28,7 @@ namespace ATMhandin2.Classes
                         i++;
                     } 
                     int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i].Altitude;
-                    double diffLongtitude = longTitude(Aircraftsinsideairspace[i].XCoordinate, aircraft.XCoordinate,
+                    double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
                         AircraftsInsideAirspace[i].YCoordinate, aircraft.YCoordinate);
 
 
