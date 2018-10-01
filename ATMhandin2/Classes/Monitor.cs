@@ -8,6 +8,28 @@ namespace ATMhandin2.Classes
 {
     public class Monitor
     {
+
+        
+
+        public bool IsInsideAirSpace(List<SpecifikAircraft> Aircrafts)
+        {
+            foreach (var data in Aircrafts)
+            {
+                if (isInsideAirspace(data))
+                {
+
+                }
+               
+            }
+            return true;
+        }
+
+
+
+
+
+
+        //Hjælpefunktion:
         public bool isInsideAirspace(SpecifikAircraft aircraft)
         {
             if (aircraft.Altitude > 500 && aircraft.Altitude < 20000 && ((aircraft.XCoordinate > 10000 && aircraft.YCoordinate > 10000) || (aircraft.XCoordinate < 90000 && aircraft.YCoordinate < 90000)))
@@ -17,20 +39,6 @@ namespace ATMhandin2.Classes
             }
 
             return false;
-        }
-        
-
-        public bool IsInsideAirSpace(List<SpecifikAircraft> Aircrafts)
-        {
-            foreach (var data in Aircrafts)
-            {
-                if (isInsideAirspace(data) == true)
-                {
-
-                }
-               
-            }
-            return true;
         }
 
         //public bool seperation()

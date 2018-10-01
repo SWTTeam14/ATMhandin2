@@ -9,7 +9,10 @@ namespace ATMhandin2.Classes
     public class SpecifikAircraft
     {
 
-
+        void printAircraft()
+        {
+            Console.WriteLine();
+        }
         public string Tag { get; set; }
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }

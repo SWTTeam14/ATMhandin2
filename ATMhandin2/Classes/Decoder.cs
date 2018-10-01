@@ -11,6 +11,7 @@ namespace ATMhandin2.Classes
     public class Decoder : IDecoder
     {
         private List<SpecifikAircraft> Aircrafts;
+
         public Decoder( )
         {
             Aircrafts = new List<SpecifikAircraft>();

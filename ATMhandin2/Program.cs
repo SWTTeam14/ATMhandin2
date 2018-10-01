@@ -20,6 +20,7 @@ namespace ATMhandin2
 
 
 
+
             //string d = "ATR423;39045;12932;14000;20151006213456789";
             //Decoder de = new Decoder();
 

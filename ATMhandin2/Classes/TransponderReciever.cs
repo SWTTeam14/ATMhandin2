@@ -12,6 +12,10 @@ namespace ATMhandin2.Classes
     {
         private ITransponderReceiver Receiver;
 
+        Decoder decode = new Decoder();
+
+        
+
         public TransponderReceiver(ITransponderReceiver receiver)
         {
             Receiver = receiver;
@@ -25,8 +29,10 @@ namespace ATMhandin2.Classes
             foreach (var data in e.TransponderData)
             {
                 System.Console.WriteLine($"Transponderdata {data}");
-                
-                
+
+                decode.ConvertDataToAircraft(data);
+
+
             }
         }
     }
