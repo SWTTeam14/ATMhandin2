@@ -19,7 +19,7 @@ namespace ATMhandin2.Classes
 
             return false;
         }
-
+        //anne
 
         public bool IsInsideAirSpace(List<SpecifikAircraft> Aircrafts)
         {
