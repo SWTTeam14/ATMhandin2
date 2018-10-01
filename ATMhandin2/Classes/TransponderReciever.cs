@@ -7,7 +7,8 @@ using TransponderReceiver;
 
 namespace ATMhandin2.Classes
 {
-    class TransponderReceiver
+    
+    public class TransponderReceiver
     {
         private ITransponderReceiver Receiver;
 
@@ -25,10 +26,8 @@ namespace ATMhandin2.Classes
             {
                 System.Console.WriteLine($"Transponderdata {data}");
                 
+                
             }
-
-            
-
         }
     }
 }

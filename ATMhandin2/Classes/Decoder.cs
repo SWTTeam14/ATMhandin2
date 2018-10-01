@@ -10,20 +10,35 @@ namespace ATMhandin2.Classes
 {
     public class Decoder : IDecoder
     {
+        private List<SpecifikAircraft> Aircrafts;
         public Decoder( )
         {
-            
+            Aircrafts = new List<SpecifikAircraft>();
         }
 
-
-       public  string[] stringSplit(string data)
+       public  SpecifikAircraft ConvertDataToAircraft(string data)
         {
             string[] tokens;
             char[] seperators = { ';' };
             tokens = data.Split(seperators, StringSplitOptions.RemoveEmptyEntries);
 
-            return tokens;
+            SpecifikAircraft bla = new SpecifikAircraft();
+
+            bla.Tag = tokens[0];
+            bla.XCoordinate = int.Parse(tokens[1]);
+            bla.YCoordinate = int.Parse(tokens[2]);
+            bla.Altitude = int.Parse(tokens[3]);
+
+           
+            DateTime dateTime = convertTime(tokens);
+
+            bla.TimeStamp = dateTime;
+            
+            Aircrafts.Add(bla);
+
+            return bla;
         }
+
 
         public string convertData(string[] data)
         {

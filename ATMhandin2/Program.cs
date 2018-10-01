@@ -16,20 +16,23 @@ namespace ATMhandin2
         {
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            var system = new Classes.TransponderReceiver(receiver);
+            var t1 = new Classes.TransponderReceiver(receiver);
 
 
 
-            string d = "ATR423;39045;12932;14000;20151006213456789";
-            Decoder de = new Decoder();
+            //string d = "ATR423;39045;12932;14000;20151006213456789";
+            //Decoder de = new Decoder();
 
-            string[] hej;
-            hej = de.stringSplit(d);
-            d = de.convertData(hej);
+            //string[] hej;
+            //hej = de.stringSplit(d);
+            //d = de.convertData(hej);
 
-            Console.WriteLine(d);
+            //Console.WriteLine(d);
+
+
             while (true)
             {
+               
                 
             }
         }
