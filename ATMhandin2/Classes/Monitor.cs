@@ -12,10 +12,9 @@ namespace ATMhandin2.Classes
         private List<SpecifikAircraft> AircraftsInsideAirspace;
 
 
-      
-
-        public void seperationEvent(List<SpecifikAircraft> Aircraftsinsideairspace)
+        public void seperationEvent()
         {
+            Console.WriteLine("Aircrafts inside airspace: " + AircraftsInsideAirspace.Count);
             foreach (var aircraft in AircraftsInsideAirspace)
             {
                 for (int i = 0; i < AircraftsInsideAirspace.Count; i++)
@@ -25,7 +24,8 @@ namespace ATMhandin2.Classes
                         i++;
                     } 
                     int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i].Altitude;
-                    double diffLongtitude = longTitude(Aircraftsinsideairspace[i].XCoordinate, aircraft.XCoordinate,
+
+                    double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
                         AircraftsInsideAirspace[i].YCoordinate, aircraft.YCoordinate);
 
 

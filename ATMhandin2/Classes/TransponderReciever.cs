@@ -33,6 +33,8 @@ namespace ATMhandin2.Classes
 
                 SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
 
+                mon.seperationEvent();
+
                 mon.isInsideAirspace(a1);
 
 
