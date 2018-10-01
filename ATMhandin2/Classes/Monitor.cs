@@ -9,13 +9,16 @@ namespace ATMhandin2.Classes
 {
     public class Monitor
     {
-        private List<SpecifikAircraft> AircraftsInsideAirspace;
+        public List<SpecifikAircraft> AircraftsInsideAirspace;
 
-
-      
-
-        public void seperationEvent(List<SpecifikAircraft> Aircraftsinsideairspace)
+        public Monitor()
         {
+            AircraftsInsideAirspace = new List<SpecifikAircraft>();
+        }
+
+        public void seperationEvent()
+        {
+            
             foreach (var aircraft in AircraftsInsideAirspace)
             {
                 for (int i = 0; i < AircraftsInsideAirspace.Count; i++)
@@ -25,7 +28,7 @@ namespace ATMhandin2.Classes
                         i++;
                     } 
                     int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i].Altitude;
-                    double diffLongtitude = longTitude(Aircraftsinsideairspace[i].XCoordinate, aircraft.XCoordinate,
+                    double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
                         AircraftsInsideAirspace[i].YCoordinate, aircraft.YCoordinate);
 
 
@@ -50,9 +53,7 @@ namespace ATMhandin2.Classes
                 {
                     AircraftsInsideAirspace.Remove(data);
                 }
-               
             }
-            
         }
 
 
@@ -68,8 +69,8 @@ namespace ATMhandin2.Classes
 
             return false;
         }
+        
         // Hjælpefunktion
-
         public double longTitude(double x1coor, double x2coor, double y1coor, double y2coor)
         {
             double xdiif = x1coor - x2coor;

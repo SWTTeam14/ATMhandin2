@@ -10,7 +10,7 @@ namespace ATMhandin2.Classes
 {
     public class Decoder : IDecoder
     {
-        private List<SpecifikAircraft> Aircrafts;
+        public List<SpecifikAircraft> Aircrafts;
 
         public Decoder( )
         {
