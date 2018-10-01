@@ -9,11 +9,11 @@ namespace ATMhandin2.Classes
 {
     public class Monitor
     {
-        public List<SpecifikAircraft> AircraftsInsideAirspace;
+        public List<Aircraft> AircraftsInsideAirspace;
 
         public Monitor()
         {
-            AircraftsInsideAirspace = new List<SpecifikAircraft>();
+            AircraftsInsideAirspace = new List<Aircraft>();
         }
 
         public void seperationEvent()
@@ -43,7 +43,7 @@ namespace ATMhandin2.Classes
             }
         }
 
-        public void FilterAirplanesOutsideAirspace(List<SpecifikAircraft> Aircrafts)
+        public void FilterAirplanesOutsideAirspace(List<Aircraft> Aircrafts)
         {
             foreach (var data in Aircrafts)
             {
@@ -60,7 +60,7 @@ namespace ATMhandin2.Classes
 
 
         //Hjælpefunktion:
-        public bool CheckifInsideAirspace(SpecifikAircraft aircraft)
+        public bool CheckifInsideAirspace(Aircraft aircraft)
         {
             if (aircraft.Altitude > 500 && aircraft.Altitude < 20000 && ((aircraft.XCoordinate < 90000 && aircraft.XCoordinate > 10000) && (aircraft.YCoordinate < 90000 && aircraft.YCoordinate > 10000)))
             {

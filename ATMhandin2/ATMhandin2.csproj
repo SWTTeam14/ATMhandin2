@@ -56,11 +56,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Monitor.cs" />
+    <Compile Include="Classes\Airspace.cs" />
+    <Compile Include="Classes\AMSController.cs" />
     <Compile Include="Classes\Decoder.cs" />
-    <Compile Include="Classes\SpecifikAircraft.cs" />
-    <Compile Include="Classes\TransponderReciever.cs" />
+    <Compile Include="Classes\Monitor.cs" />
+    <Compile Include="Classes\Aircraft.cs" />
+    <Compile Include="Classes\TransponderDataItem.cs" />
+    <Compile Include="Classes\TransponderReceiverClient.cs" />
+    <Compile Include="Events\TransponderDataItemEventArgs.cs" />
     <Compile Include="Interfaces\IDecoder.cs" />
+    <Compile Include="Interfaces\ITransponderDataItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
