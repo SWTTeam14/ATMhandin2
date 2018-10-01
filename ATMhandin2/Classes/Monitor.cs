@@ -8,7 +8,7 @@ namespace ATMhandin2.Classes
 {
     public class Monitor
     {
-
+        //Dette er lige en test
         public bool isInsideAirspace(SpecifikAircraft aircraft)
         {
             if (aircraft.Altitude > 500 && aircraft.Altitude < 20000 && ((aircraft.XCoordinate > 10000 && aircraft.YCoordinate > 10000) || (aircraft.XCoordinate < 90000 && aircraft.YCoordinate < 90000)))
