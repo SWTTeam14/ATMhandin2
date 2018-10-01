@@ -8,6 +8,7 @@ namespace ATMhandin2.Classes
 {
     public class SpecifikAircraft
     {
+        
 
 
         public string Tag { get; set; }
