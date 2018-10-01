@@ -33,6 +33,7 @@ namespace Transponder.Receiver.Test
 
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+
         }
     }
 }

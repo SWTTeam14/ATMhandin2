@@ -9,12 +9,17 @@ namespace ATMhandin2.Classes
 {
     public class Monitor
     {
-        private List<SpecifikAircraft> AircraftsInsideAirspace;
+        public List<SpecifikAircraft> AircraftsInsideAirspace;
 
+        public Monitor()
+        {
+            AircraftsInsideAirspace = new List<SpecifikAircraft>();
+        }
 
         public void seperationEvent()
         {
             Console.WriteLine("Aircrafts inside airspace: " + AircraftsInsideAirspace.Count);
+
             foreach (var aircraft in AircraftsInsideAirspace)
             {
                 for (int i = 0; i < AircraftsInsideAirspace.Count; i++)
@@ -23,6 +28,7 @@ namespace ATMhandin2.Classes
                     {
                         i++;
                     } 
+
                     int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i].Altitude;
 
                     double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
@@ -46,7 +52,7 @@ namespace ATMhandin2.Classes
                 {
                     AircraftsInsideAirspace.Add(data);
                 }
-                else if (!CheckifInsideAirspace(data))
+                else if (!CheckifInsideAirspace(data) && AircraftsInsideAirspace.Count > 0)
                 {
                     AircraftsInsideAirspace.Remove(data);
                 }

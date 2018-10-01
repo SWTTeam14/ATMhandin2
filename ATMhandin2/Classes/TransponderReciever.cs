@@ -27,20 +27,25 @@ namespace ATMhandin2.Classes
 
         private void RecieverTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
+ 
+
             foreach (var data in e.TransponderData)
             {
-                
-
                 SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
+                
+                mon.FilterAirplanesOutsideAirspace(decode.Aircrafts);
 
-                mon.CheckifInsideAirspace(a1);
                 mon.seperationEvent();
 
-
-
-
+                for (int i = 0; i < decode.Aircrafts.Count; i++)
+                {
+                    Console.WriteLine("Fly: " + decode.Aircrafts[i].Tag);
+                }
             }
-            
+
+
+
+
         }
     }
 }
