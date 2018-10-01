@@ -27,25 +27,27 @@ namespace ATMhandin2.Classes
 
         private void RecieverTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
- 
+            SpecifikAircraft a2 = new SpecifikAircraft("MUH120", 15000,15000,1500);
+            SpecifikAircraft a3 = new SpecifikAircraft("OHH10", 15400,15400,1500);
+
+            decode.Aircrafts.Add(a2);
+            decode.Aircrafts.Add(a3);
 
             foreach (var data in e.TransponderData)
             {
-                SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
-                
-                mon.FilterAirplanesOutsideAirspace(decode.Aircrafts);
 
+                decode.ConvertDataToAircraft(data);
+
+                SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
+
+                mon.CheckifInsideAirspace(a1);
                 mon.seperationEvent();
 
-                for (int i = 0; i < decode.Aircrafts.Count; i++)
-                {
-                    Console.WriteLine("Fly: " + decode.Aircrafts[i].Tag);
-                }
+
+
+
             }
-
-
-
-
+            
         }
     }
 }
