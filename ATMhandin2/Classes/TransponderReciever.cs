@@ -38,9 +38,13 @@ namespace ATMhandin2.Classes
 
                 decode.ConvertDataToAircraft(data);
 
-                mon.FilterAirplanesOutsideAirspace(decode.Aircrafts);
-                
+                SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
+
+                mon.CheckifInsideAirspace(a1);
                 mon.seperationEvent();
+
+
+
 
             }
             
