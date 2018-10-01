@@ -17,9 +17,7 @@ namespace ATMhandin2.Classes
            
         }
 
-        public SpecifikAircraft()
-        {
-            ;}
+        public SpecifikAircraft(){;}
         
         void printAircraft()
         {
