@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using ATMhandin2.Classes;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
@@ -15,13 +16,23 @@ namespace Transponder.Receiver.Test
     {
         private ITransponderReceiver _fakeTransponderReceiver;
         private ATMhandin2.Classes.TransponderReceiver _uut;
+        private Monitor uutMonitor;
+        
 
         [SetUp]
         public void setup()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
             _uut = new ATMhandin2.Classes.TransponderReceiver(_fakeTransponderReceiver);
+            uutMonitor = new Monitor();
         }
+
+        [Test]
+        public void TestLongtitude()
+        {
+            Assert.That(uutMonitor.longTitude(4, 2, 4, 4), Is.EqualTo(2));
+        }
+
 
         [Test]
         public void TestReception()
@@ -33,7 +44,6 @@ namespace Transponder.Receiver.Test
 
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
-
         }
     }
 }

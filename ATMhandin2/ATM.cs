@@ -10,7 +10,7 @@ using Decoder = ATMhandin2.Classes.Decoder;
 
 namespace ATMhandin2
 {
-    class Program
+    class ATM
     {
         static void Main(string[] args)
         {

@@ -8,7 +8,7 @@ using TransponderReceiver;
 namespace ATMhandin2.Classes
 {
     
-    public class TransponderReceiver
+    public class TransponderReceiver 
     {
         private ITransponderReceiver Receiver;
         
@@ -27,11 +27,15 @@ namespace ATMhandin2.Classes
 
         private void RecieverTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
-            SpecifikAircraft a2 = new SpecifikAircraft("MUH120", 15000,15000,1500);
-            SpecifikAircraft a3 = new SpecifikAircraft("OHH10", 15400,15400,1500);
+            //SpecifikAircraft a2 = new SpecifikAircraft("MUH120", 15000,15000,1500);
+            //SpecifikAircraft a3 = new SpecifikAircraft("OHH10", 15400,15400,1500);
 
-            decode.Aircrafts.Add(a2);
-            decode.Aircrafts.Add(a3);
+            //decode.Aircrafts.Add(a2);
+            //decode.Aircrafts.Add(a3);
+
+            //mon.CheckifInsideAirspace(a2);
+            //mon.CheckifInsideAirspace(a3);
+            //mon.CheckifInsideAirspace(a1);
 
             foreach (var data in e.TransponderData)
             {
@@ -40,14 +44,9 @@ namespace ATMhandin2.Classes
 
                 SpecifikAircraft a1 = decode.ConvertDataToAircraft(data);
 
-                mon.CheckifInsideAirspace(a1);
-                mon.seperationEvent();
-
-
-
-
             }
-            
+            mon.FilterAirplanesOutsideAirspace(decode.Aircrafts);
+            mon.seperationEvent();
         }
     }
 }
