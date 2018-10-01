@@ -8,7 +8,19 @@ namespace ATMhandin2.Classes
 {
     public class SpecifikAircraft
     {
+        public SpecifikAircraft(string tag, int xCoordinate, int yCoordinate, int altitude)
+        {
+            Tag = tag;
+            XCoordinate = xCoordinate;
+            YCoordinate = yCoordinate;
+            Altitude = altitude;
+           
+        }
 
+        public SpecifikAircraft()
+        {
+            ;}
+        
         void printAircraft()
         {
             Console.WriteLine();
