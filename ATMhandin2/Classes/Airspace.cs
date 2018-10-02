@@ -7,7 +7,7 @@ using ATMhandin2.Interfaces;
 
 namespace ATMhandin2.Classes
 {
-    public class Airspace
+    public class Airspace : IAirspace
     {
         public Airspace(int South, int West, int North, int East, int LowerAltitude, int UpperAltitude)
         {

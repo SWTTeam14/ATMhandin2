@@ -7,7 +7,7 @@ using ATMhandin2.Interfaces;
 
 namespace ATMhandin2.Classes
 {
-    public class Aircraft
+    public class Aircraft : IAircraft
     {
         public Aircraft(string tag, int xCoordinate, int yCoordinate, int altitude)
         {
