@@ -14,7 +14,7 @@ namespace Transponder.Receiver.Test
     {
         private ITransponderReceiver _fakeTransponderReceiver;
         private TransponderReceiverClient _uut;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -31,12 +31,13 @@ namespace Transponder.Receiver.Test
             testData.Add("ATR423;39045;12932;14000;20151006213456789");
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
             testData.Add("XYZ987;25059;75654;4000;20151006213456789");
-        
+
             //ACT
-            _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
-        
+            _fakeTransponderReceiver.TransponderDataReady +=
+                Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+
             //ASSERT
-            
+
         }
     }
 
@@ -62,7 +63,7 @@ namespace Transponder.Receiver.Test
         //    string testData = "ATR423;39045;12932;14000;20151006213456789";
 
         //   ITransponderDataItem  _fakeTdItem = _fakeDecoder.convertData(testData);
-           
+
 
         //    Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
         //    //Assert.AreSame(TestString, _fakeTdItem.ToString());
@@ -70,121 +71,122 @@ namespace Transponder.Receiver.Test
         //}
 
 
-        
-        [TestCase(20000, 90000, 90000)]
-        [TestCase(500, 10000, 90000)]
-        [TestCase(500, 50000, 50000)]
-        public void TestThatAircraftIsInsideAirspace(int a, int b, int c)
-        {
-            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, XCoordinate = b, YCoordinate = c};
 
-            Assert.That(_fakeAirspace.IsAircraftInside(td), Is.True);
+
+        //[TestCase()]
+        //public void TestUpdateAircraftPosition(int a, int b, int c)
+        //{
+
+        //    ITransponderDataItem td = new TransponderDataItem()
+        //        {Altitude = a, Tag = "", TimeStamp = , XCoordinate = b, YCoordinate = c};
+
+        //    _fakeAircraft.Update(td);
+        //}
+
+        public class TestDecoder
+        {
+            private IDecoder _fakeDecoder;
+            private Decoder _uut;
+
+            [SetUp]
+            public void Setup()
+            {
+                _fakeDecoder = Substitute.For<IDecoder>();
+
+                _uut = new Decoder();
+            }
+
+            [Test]
+            public void TestConvertData()
+            {
+                string testData = "ATR423;39045;12932;14000;20151006213456789";
+
+                TransponderDataItem td = _fakeDecoder.convertData(testData);
+
+                Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
+            }
         }
 
-        [TestCase(20001, 90000, 90000)]
-        [TestCase(499, 10000, 90000)]
-        [TestCase(-99, 50000, 50000)]
-        [TestCase(-99, 9999, 50000)]
-        [TestCase(-99, 90001, 50000)]
-        [TestCase(-99, 50000, 90001)]
-        public void TestThatAircraftIsNOTInsideAirspace(int a, int b, int c)
+        public class TestAirspace
         {
-            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, XCoordinate = b, YCoordinate = c};
+            private Airspace _uut;
 
-            Assert.That(_fakeAirspace.IsAircraftInside(td), Is.False);
+            [SetUp]
+            public void Setup()
+            {
+               
+                _uut = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
+            }
+
+            [TestCase(20000, 90000, 90000)]
+            [TestCase(500, 10000, 90000)]
+            [TestCase(500, 50000, 50000)]
+            public void TestThatAircraftIsInsideAirspace(int a, int b, int c)
+            {
+                ITransponderDataItem td = new TransponderDataItem() {Altitude = a, XCoordinate = b, YCoordinate = c};
+
+                Assert.That(_uut.IsAircraftInside(td), Is.True);
+            }
+
+            [TestCase(20001, 90000, 90000)]
+            [TestCase(499, 10000, 90000)]
+            [TestCase(-99, 50000, 50000)]
+            [TestCase(-99, 9999, 50000)]
+            [TestCase(-99, 90001, 50000)]
+            [TestCase(-99, 50000, 90001)]
+            public void TestThatAircraftIsNOTInsideAirspace(int a, int b, int c)
+            {
+                ITransponderDataItem td = new TransponderDataItem() {Altitude = a, XCoordinate = b, YCoordinate = c};
+
+                Assert.That(_uut.IsAircraftInside(td), Is.False);
+            }
+
+
         }
 
-        [TestCase()]
-        public void TestUpdateAircraftPosition(int a, int b, int c)
+        public class TestAircraft
         {
-            
-            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, Tag = "", TimeStamp = , XCoordinate = b, YCoordinate = c};
+            //private IAirspace _fakeAirspace;
+            private Airspace _uut;
+            private int South, North, West, East, Low, High;
 
-            _fakeAircraft.Update(td);
+            [SetUp]
+            public void Setup()
+            {
+                //_fakeAirspace = Substitute.For<IAirspace>();
+
+                _uut = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
+            }
 
 
-    public class TestDecoder
-    {
-        private IDecoder _fakeDecoder;
-        private Decoder _uut;
-        
-        [SetUp]
-        public void Setup()
-        {
-            _fakeDecoder = Substitute.For<IDecoder>();
-
-            _uut = new Decoder();
         }
-        
-        [Test]
-        public void TestConvertData()
+
+        public class TestAMSController
         {
-            string testData = "ATR423;39045;12932;14000;20151006213456789";
+            private IAMSController _fakeAmsController;
+            private TransponderReceiverClient trc;
+            private AMSController _uut;
 
-            TransponderDataItem td = _fakeDecoder.convertData(testData);
+            [SetUp]
+            public void Setup()
+            {
+                _fakeAmsController = Substitute.For<IAMSController>();
 
-            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
+                _uut = new AMSController(trc);
+            }
+
+
         }
+
+        //public class TestMonitor
+        //{
+        //    private IMonitor;
+        //    private 
+        //
+        //    [SetUp]
+        //    public void Setup() { }
+        //
+        //
+        //}
     }
-
-    public class TestAirspace
-    {
-        //private IAircraft _fakeAircraft;
-        private Aircraft _uut;
-
-        [SetUp]
-        public void Setup()
-        {
-            //_fakeAircraft = Substitute.For<IAircraft>();
-
-            _uut = new Aircraft("",1,2,3);
-        }
-
-
-    }
-
-    public class TestAircraft
-    {
-        //private IAirspace _fakeAirspace;
-        private Airspace _uut;
-        private int South, North, West, East, Low, High;
-
-        [SetUp]
-        public void Setup()
-        {
-            //_fakeAirspace = Substitute.For<IAirspace>();
-
-            _uut = new Airspace(10000,10000,90000,90000,500,20000);
-        }
-
-
-    }
-
-    public class TestAMSController
-    {
-        private IAMSController _fakeAmsController;
-        private TransponderReceiverClient trc;
-        private AMSController _uut;
-
-        [SetUp]
-        public void Setup()
-        {
-            _fakeAmsController = Substitute.For<IAMSController>();
-
-            _uut = new AMSController(trc);
-        }
-
-
-    }
-
-    //public class TestMonitor
-    //{
-    //    private IMonitor;
-    //    private 
-    //
-    //    [SetUp]
-    //    public void Setup() { }
-    //
-    //
-    //}
 }
