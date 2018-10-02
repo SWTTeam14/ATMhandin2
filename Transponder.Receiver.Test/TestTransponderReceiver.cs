@@ -18,6 +18,8 @@ namespace Transponder.Receiver.Test
         private IAMSController _fakeAmsController;
 
         private Airspace _fakeAirspace;
+
+        private Aircraft _fakeAircraft;
         // private ITransponderDataItem _fakeTdItem;
 
 
@@ -34,6 +36,7 @@ namespace Transponder.Receiver.Test
 
             _fakeAirspace = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
 
+            _fakeAircraft = new Aircraft("tag1", 10000, 10000, 500); 
             // _fakeTdItem = Substitute.For<ITransponderDataItem>();
 
         }
@@ -82,13 +85,38 @@ namespace Transponder.Receiver.Test
 
 
         
-        [TestCase(19999, 89999, 89999)]
-        [TestCase(501, 50000, 50000)]
+        [TestCase(20000, 90000, 90000)]
+        [TestCase(500, 10000, 90000)]
+        [TestCase(500, 50000, 50000)]
         public void TestThatAircraftIsInsideAirspace(int a, int b, int c)
         {
             ITransponderDataItem td = new TransponderDataItem(){Altitude = a, XCoordinate = b, YCoordinate = c};
 
             Assert.That(_fakeAirspace.IsAircraftInside(td), Is.True);
+        }
+
+        [TestCase(20001, 90000, 90000)]
+        [TestCase(499, 10000, 90000)]
+        [TestCase(-99, 50000, 50000)]
+        [TestCase(-99, 9999, 50000)]
+        [TestCase(-99, 90001, 50000)]
+        [TestCase(-99, 50000, 90001)]
+        public void TestThatAircraftIsNOTInsideAirspace(int a, int b, int c)
+        {
+            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, XCoordinate = b, YCoordinate = c};
+
+            Assert.That(_fakeAirspace.IsAircraftInside(td), Is.False);
+        }
+
+        [TestCase()]
+        public void TestUpdateAircraftPosition(int a, int b, int c)
+        {
+            
+            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, Tag = "", TimeStamp = , XCoordinate = b, YCoordinate = c};
+
+            _fakeAircraft.Update(td);
+
+
         }
         
         [Test]
