@@ -28,8 +28,8 @@ namespace ATMhandin2.Classes
 
         public bool IsAircraftInside(ITransponderDataItem td)
         {
-            return td.XCoordinate < East && td.XCoordinate > West && td.YCoordinate < North && td.YCoordinate > South &&
-                   td.Altitude > LowerAltitude && td.Altitude < UpperAltitude;
+            return td.XCoordinate <= East && td.XCoordinate >= West && td.YCoordinate <= North && td.YCoordinate >= South &&
+                   td.Altitude >= LowerAltitude && td.Altitude <= UpperAltitude;
         }
     }
 }
