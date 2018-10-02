@@ -25,13 +25,13 @@ namespace ATMhandin2.Classes
 
         private void ReceiverTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
+
+            var decoder = new Decoder();
             foreach (var data in e.TransponderData)
             {
-                Decoder decoder = new Decoder();
-                TransponderDataItem td = decoder.convertData(data);
+                var td = decoder.convertData(data);
 
-                TransponderDataItemEventArgs args = new TransponderDataItemEventArgs();
-                args.TransponderDataItem = td;
+                var args = new TransponderDataItemEventArgs {TransponderDataItem = td};
 
                 OnTransponderDataItemEvent(args);
 
@@ -41,7 +41,7 @@ namespace ATMhandin2.Classes
 
         protected void OnTransponderDataItemEvent(TransponderDataItemEventArgs e)
         {
-            TransponderDataItemEvent(this, e);
+            TransponderDataItemEvent?.Invoke(this, e);
         }
     }
 }

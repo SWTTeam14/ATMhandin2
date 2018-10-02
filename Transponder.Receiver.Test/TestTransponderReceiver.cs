@@ -16,10 +16,12 @@ namespace Transponder.Receiver.Test
         private IDecoder _fakeDecoder;
 
         [SetUp]
-        public void setup()
+        public void Setup()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
+
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
+
             _fakeDecoder = Substitute.For<IDecoder>();
         }
 
@@ -32,13 +34,12 @@ namespace Transponder.Receiver.Test
             testData.Add("ATR423;39045;12932;14000;20151006213456789");
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
             testData.Add("XYZ987;25059;75654;4000;20151006213456789");
-
+        
             //ACT
-            _fakeTransponderReceiver.TransponderDataReady
-                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
-
+            _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+        
             //ASSERT
-            //_fakeTransponderReceiver.Received(); //SOMETHING. BUT WHAT ?!
+            
         }
 
         [Test]
