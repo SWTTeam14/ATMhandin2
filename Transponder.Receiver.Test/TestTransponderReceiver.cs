@@ -38,7 +38,7 @@ namespace Transponder.Receiver.Test
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
             //ASSERT
-            _fakeTransponderReceiver.Received(); //SOMETHING. BUT WHAT ?!
+            //_fakeTransponderReceiver.Received(); //SOMETHING. BUT WHAT ?!
         }
 
         [Test]
