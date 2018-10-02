@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ATMhandin2.Interfaces;
 using ATMhandin2.Classes;
+using ATMhandin2.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
@@ -13,18 +13,16 @@ namespace Transponder.Receiver.Test
     {
         private ITransponderReceiver _fakeTransponderReceiver;
         private TransponderReceiverClient _uut;
-        private Decoder D1;
-        private IDecoder _decoder;
+        private IDecoder _fakeDecoder;
 
         [SetUp]
         public void setup()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
-            _decoder = Substitute.For<IDecoder>();
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
-            
-            D1 = new Decoder();
+            _fakeDecoder = Substitute.For<IDecoder>();
         }
+
 
         [Test]
         public void TestReception()
@@ -40,8 +38,17 @@ namespace Transponder.Receiver.Test
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
             //ASSERT
-            
+            _fakeTransponderReceiver.Received(); //SOMETHING. BUT WHAT ?!
+        }
 
+        [Test]
+        public void TestDecoder()
+        {
+            string testData = "ATR423;39045;12932;14000;20151006213456789";
+            
+            TransponderDataItem td = _fakeDecoder.convertData(testData);
+
+            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
         }
     }
 }
