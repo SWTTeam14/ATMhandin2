@@ -54,7 +54,6 @@ namespace Transponder.Receiver.Test
             TransponderDataItem td = _fakeDecoder.convertData(testData);
 
             Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
-
             
         }
 
