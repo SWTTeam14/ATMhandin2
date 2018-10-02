@@ -10,13 +10,13 @@ namespace Transponder.Receiver.Test
     public class TestTransponderReceiver
     {
         private ITransponderReceiver _fakeTransponderReceiver;
-        private ATMhandin2.Classes.TransponderReceiver _uut;
+        private ATMhandin2.Classes.TransponderReceiverClient _uut;
 
         [SetUp]
         public void setup()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
-            _uut = new ATMhandin2.Classes.TransponderReceiver(_fakeTransponderReceiver);
+            _uut = new ATMhandin2.Classes.TransponderReceiverClient(_fakeTransponderReceiver);
         }
 
         [Test]
