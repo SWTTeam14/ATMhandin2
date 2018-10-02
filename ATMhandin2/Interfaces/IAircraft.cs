@@ -13,7 +13,8 @@ namespace ATMhandin2.Interfaces
         int YCoordinate { get; set; }
         int Altitude { get; set; }
         DateTime TimeStamp { get; set; }
-
+        int CompassCourse { get; set; }
+        int HorizontalVelocity { get; set; }
         void Update(ITransponderDataItem td);
 
         string ToString();
