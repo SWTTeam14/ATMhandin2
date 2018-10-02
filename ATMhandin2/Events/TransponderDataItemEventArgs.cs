@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ATMhandin2.Classes;
 
-namespace ATMhandin2.Interfaces
+namespace ATMhandin2.Events
 {
-    public interface IDecoder
+    public class TransponderDataItemEventArgs : EventArgs
     {
-        TransponderDataItem convertData(string data);
+        public TransponderDataItem TransponderDataItem { get; set; }
     }
 }
