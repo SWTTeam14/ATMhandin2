@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using ATMhandin2.Classes;
 using ATMhandin2.Interfaces;
 using NSubstitute;
@@ -15,7 +16,9 @@ namespace Transponder.Receiver.Test
         private TransponderReceiverClient _uut;
         private IDecoder _fakeDecoder;
         private IAMSController _fakeAmsController;
-        private TransponderDataItem _fakeTdItem;
+
+        private Airspace _fakeAirspace;
+        // private ITransponderDataItem _fakeTdItem;
 
 
         [SetUp]
@@ -29,7 +32,9 @@ namespace Transponder.Receiver.Test
 
             _fakeAmsController = Substitute.For<IAMSController>();
 
-            _fakeTdItem = new TransponderDataItem();
+            _fakeAirspace = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
+
+            // _fakeTdItem = Substitute.For<ITransponderDataItem>();
 
         }
 
@@ -60,20 +65,32 @@ namespace Transponder.Receiver.Test
             
         }
 
-        [Test]
-        public void TestTostring()
+        //[Test]
+        //public void TestTostring()
+        //{
+        //    string TestString =
+        //        "Tag:\t\tATR423\nX coordinate:\t39045 meters\nY coordinate:\t12932 meters\nAltitude:\t14000 meters\nTimestamp:\tJune 10, 2015 21:34:56 789\n";
+        //    string testData = "ATR423;39045;12932;14000;20151006213456789";
+
+        //   ITransponderDataItem  _fakeTdItem = _fakeDecoder.convertData(testData);
+           
+
+        //    Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
+        //    //Assert.AreSame(TestString, _fakeTdItem.ToString());
+        //    //StringAssert.AreEqualIgnoringCase(TestString, _fakeTdItem.ToString());
+        //}
+
+
+        
+        [TestCase(19999, 89999, 89999)]
+        [TestCase(501, 50000, 50000)]
+        public void TestThatAircraftIsInsideAirspace(int a, int b, int c)
         {
-            string TestString =
-                "Tag:\t\tATR423\nX coordinate:\t39045 meters\nY coordinate:\t12932 meters\nAltitude:\t14000 meters\nTimestamp:\tJune 10, 2015 21:34:56 789\n";
-            string testData = "ATR423;39045;12932;14000;20151006213456789";
+            ITransponderDataItem td = new TransponderDataItem(){Altitude = a, XCoordinate = b, YCoordinate = c};
 
-            _fakeTdItem = _fakeDecoder.convertData(testData);
-
-            Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
-            //Assert.AreSame(TestString, _fakeTdItem.ToString());
-
+            Assert.That(_fakeAirspace.IsAircraftInside(td), Is.True);
         }
-
+        
         [Test]
         public void TestAMSController()
         {
