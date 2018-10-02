@@ -21,7 +21,7 @@ namespace ATMhandin2.Classes
         private void TrcOnTransponderDataItemEvent(object sender, TransponderDataItemEventArgs e)
         {
             var td = e.TransponderDataItem;
-            Console.WriteLine(e.TransponderDataItem.ToString());
+            //Console.WriteLine(e.TransponderDataItem.ToString());
             if (_airspace.IsAircraftInside(e.TransponderDataItem))
             {
                 if (_aircraftsInsideAirspace.ContainsKey(td.Tag))

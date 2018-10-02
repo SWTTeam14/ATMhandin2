@@ -15,9 +15,6 @@ namespace ATMhandin2.Classes
         public event TransponderDataItemHandler TransponderDataItemEvent;
         private ITransponderReceiver Receiver;
 
-        Monitor mon = new Monitor();
-        Aircraft a1 = new Aircraft("hej", 20000, 20000, 500);
-
         public TransponderReceiverClient(ITransponderReceiver receiver)
         {
             Receiver = receiver;
