@@ -12,5 +12,6 @@ namespace ATMhandin2.Interfaces
         int YCoordinate { get; set; }
         int Altitude { get; set; }
         DateTime TimeStamp { get; set; }
+        string ToString();
     }
 }

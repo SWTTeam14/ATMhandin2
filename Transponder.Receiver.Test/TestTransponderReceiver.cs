@@ -15,6 +15,7 @@ namespace Transponder.Receiver.Test
         private TransponderReceiverClient _uut;
         private IDecoder _fakeDecoder;
         private IAMSController _fakeAmsController;
+        private TransponderDataItem _fakeTdItem;
 
 
         [SetUp]
@@ -27,8 +28,10 @@ namespace Transponder.Receiver.Test
             _fakeDecoder = Substitute.For<IDecoder>();
 
             _fakeAmsController = Substitute.For<IAMSController>();
-        }
 
+            _fakeTdItem = new TransponderDataItem();
+
+        }
 
         [Test]
         public void TestReception()
@@ -53,7 +56,22 @@ namespace Transponder.Receiver.Test
             
             TransponderDataItem td = _fakeDecoder.convertData(testData);
 
-            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));          
+            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
+            
+        }
+
+        [Test]
+        public void TestTostring()
+        {
+            string TestString =
+                "Tag:\t\tATR423\nX coordinate:\t39045 meters\nY coordinate:\t12932 meters\nAltitude:\t14000 meters\nTimestamp:\tJune 10, 2015 21:34:56 789\n";
+            string testData = "ATR423;39045;12932;14000;20151006213456789";
+
+            _fakeTdItem = _fakeDecoder.convertData(testData);
+
+            Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
+            //Assert.AreSame(TestString, _fakeTdItem.ToString());
+
         }
 
         [Test]
