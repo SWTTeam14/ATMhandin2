@@ -13,24 +13,13 @@ namespace Transponder.Receiver.Test
     {
         private ITransponderReceiver _fakeTransponderReceiver;
         private TransponderReceiverClient _uut;
-        private IDecoder _fakeDecoder;
-        private IAMSController _fakeAmsController;
-        private TransponderDataItem _fakeTdItem;
-
-
+        
         [SetUp]
         public void Setup()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
 
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
-
-            _fakeDecoder = Substitute.For<IDecoder>();
-
-            _fakeAmsController = Substitute.For<IAMSController>();
-
-            _fakeTdItem = new TransponderDataItem();
-
         }
 
         [Test]
@@ -48,16 +37,20 @@ namespace Transponder.Receiver.Test
             //ASSERT
             
         }
+    }
 
-        [Test]
-        public void TestDecoder()
+    public class TestTransponderDataItem
+    {
+        private ITransponderDataItem _fakeTdItem;
+        private TransponderDataItem _uut;
+
+
+        [SetUp]
+        public void Setup()
         {
-            string testData = "ATR423;39045;12932;14000;20151006213456789";
-            
-            TransponderDataItem td = _fakeDecoder.convertData(testData);
+            _fakeTdItem = Substitute.For<ITransponderDataItem>();
 
-            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
-            
+            _uut = new TransponderDataItem();
         }
 
         [Test]
@@ -66,18 +59,94 @@ namespace Transponder.Receiver.Test
             string TestString =
                 "Tag:\t\tATR423\nX coordinate:\t39045 meters\nY coordinate:\t12932 meters\nAltitude:\t14000 meters\nTimestamp:\tJune 10, 2015 21:34:56 789\n";
             string testData = "ATR423;39045;12932;14000;20151006213456789";
+            
+            //Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
+            Assert.AreSame(TestString, _fakeTdItem.ToString());
 
-            _fakeTdItem = _fakeDecoder.convertData(testData);
+        }
+    }
 
-            Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
-            //Assert.AreSame(TestString, _fakeTdItem.ToString());
+    public class TestDecoder
+    {
+        private IDecoder _fakeDecoder;
+        private Decoder _uut;
+        
+        [SetUp]
+        public void Setup()
+        {
+            _fakeDecoder = Substitute.For<IDecoder>();
 
+            _uut = new Decoder();
         }
 
         [Test]
-        public void TestAMSController()
+        public void TestConvertData()
         {
-            
+            string testData = "ATR423;39045;12932;14000;20151006213456789";
+
+            TransponderDataItem td = _fakeDecoder.convertData(testData);
+
+            Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
         }
     }
+
+    public class TestAirspace
+    {
+        private IAircraft _fakeAircraft;
+        private Aircraft _uut;
+
+        [SetUp]
+        public void Setup()
+        {
+            _fakeAircraft = Substitute.For<IAircraft>();
+
+            _uut = new Aircraft();
+        }
+
+
+    }
+
+    public class TestAircraft
+    {
+        private IAirspace _fakeAirspace;
+        private Airspace _uut;
+
+        [SetUp]
+        public void Setup()
+        {
+            _fakeAirspace = Substitute.For<IAirspace>();
+
+            _uut = new Airspace();
+        }
+
+
+    }
+
+    public class TestAMSController
+    {
+        private IAMSController _fakeAmsController;
+        private TransponderReceiverClient trc;
+        private AMSController _uut;
+
+        [SetUp]
+        public void Setup()
+        {
+            _fakeAmsController = Substitute.For<IAMSController>();
+
+            _uut = new AMSController(trc);
+        }
+
+
+    }
+
+    //public class TestMonitor
+    //{
+    //    private IMonitor;
+    //    private 
+    //
+    //    [SetUp]
+    //    public void Setup() { }
+    //
+    //
+    //}
 }
