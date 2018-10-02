@@ -56,12 +56,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\FakeTransponderReceiver.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Decoder.cs" />
     <Compile Include="Classes\SpecifikAircraft.cs" />
     <Compile Include="Classes\TransponderReciever.cs" />
     <Compile Include="Interfaces\IDecoder.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ATM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

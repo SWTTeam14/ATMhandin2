@@ -22,20 +22,22 @@ namespace ATMhandin2.Classes
 
             foreach (var aircraft in AircraftsInsideAirspace)
             {
-                for (int i = 0; i < AircraftsInsideAirspace.Count; i++)
+                for (int i = 1; i < AircraftsInsideAirspace.Count; i++)
                 {
                     if (aircraft == AircraftsInsideAirspace[i])
                     {
-                        i++;
+                        return;
                     } 
 
-                    int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i].Altitude;
+                    int diffAltitude = aircraft.Altitude - AircraftsInsideAirspace[i-1].Altitude;
+
                     double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
                         AircraftsInsideAirspace[i].YCoordinate, aircraft.YCoordinate);
 
+
                     if (diffAltitude < 300 && diffLongtitude < 5000)
                     {
-                        Console.WriteLine(" WARNING!!!! divert course");
+                        Console.WriteLine("WARNING!!!! devert course");
                         // Få fly til at ændre retning. 
                     }
                 }
@@ -76,7 +78,7 @@ namespace ATMhandin2.Classes
         {
             double xdiif = x1coor - x2coor;
             double ydiif = y1coor - y2coor;
-            double longtitude = Math.Sqrt(Math.Pow(xdiif, 2) - Math.Pow(ydiif, 2));
+            double longtitude = Math.Sqrt(Math.Pow(xdiif, 2) + Math.Pow(ydiif, 2));
 
             return longtitude;
         }
