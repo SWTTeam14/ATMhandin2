@@ -141,7 +141,7 @@ namespace Transponder.Receiver.Test
             {
                 _fakeAircraft = Substitute.For<IAircraft>();
 
-                _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude);
+                _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude,1);
             }
 
             [Test]

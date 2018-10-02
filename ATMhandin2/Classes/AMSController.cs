@@ -33,7 +33,7 @@ namespace ATMhandin2.Classes
                 else
                 {
                     //Add aircraft if it doesn't exists. 
-                    Aircraft aircraft = new Aircraft(td.Tag, td.XCoordinate, td.YCoordinate, td.Altitude);
+                    Aircraft aircraft = new Aircraft(td.Tag, td.XCoordinate, td.YCoordinate, td.Altitude,1);
                     _aircraftsInsideAirspace.Add(td.Tag, aircraft);
                 }    
             }
