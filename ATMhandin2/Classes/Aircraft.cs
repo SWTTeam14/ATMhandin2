@@ -5,28 +5,43 @@ namespace ATMhandin2.Classes
 {
     public class Aircraft : IAircraft
     {
-        public Aircraft(string tag, int xCoordinate, int yCoordinate, int altitude, double compassCourse)
+        public Aircraft(string tag, int xCoordinate, int yCoordinate, int altitude)
         {
             Tag = tag;
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
             Altitude = altitude;
-            this.TimeStamp = DateTime.Now;
-            CompassCourse = compassCourse;
-
         }
 
         public string Tag { get; set; }
-        public double XCoordinate { get; set; }
-        public double YCoordinate { get; set; }
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
         public int Altitude { get; set; }
         public DateTime TimeStamp { get; set; }
-        public double CompassCourse { get; set; }
-
-        public double HorizontalVelocity { get; set; }
+        public int CompassCourse { get; set; }
+        public int HorizontalVelocity { get; set; }
 
         public void Update(ITransponderDataItem td)
         {
+            double xdiff = td.XCoordinate - XCoordinate;
+            double ydiff = td.YCoordinate - YCoordinate;
+            double distance = Math.Sqrt(Math.Pow(xdiff, 2) + Math.Pow(ydiff, 2));
+
+            HorizontalVelocity = (int) (distance / (td.TimeStamp - TimeStamp).TotalSeconds);
+
+            double angle = Math.Atan(xdiff / ydiff) * 180 / Math.PI;
+
+            if (xdiff > 0 && ydiff > 0)
+            {
+                angle += 180;
+            }
+            else if (xdiff < 0 && ydiff > 0)
+            {
+                angle += 360;
+            }
+
+            CompassCourse = (int) angle; 
+
             XCoordinate = td.XCoordinate;
             YCoordinate = td.YCoordinate;
             Altitude = td.Altitude;
@@ -36,21 +51,9 @@ namespace ATMhandin2.Classes
         public override string ToString()
         {
             string dateTimeString = TimeStamp.ToString("MMMM dd, yyyy HH:mm:ss fff");
-            return string.Format("Tag:\t\t{0}\nX coordinate:\t{1} meters\nY coordinate:\t{2} meters\nAltitude:\t{3} meters\nTimestamp:\t{4}\nCompassCourse:\t{5}\n", Tag, XCoordinate, YCoordinate, Altitude, dateTimeString, CompassCourse);
+            return string.Format("Tag:\t\t\t{0}\nX coordinate:\t\t{1} meters\nY coordinate:\t\t{2} meters\nAltitude:\t\t{3} meters\nTimestamp:\t\t{4}\nCompassCourse:\t\t{5}\nHorizontalVelocity:\t{6}\n", Tag, XCoordinate, YCoordinate, Altitude, dateTimeString, CompassCourse, HorizontalVelocity);
         }
 
-        public void Calculation()
-        {
-            DateTime now = DateTime.Now;
-            double totalMilliseconds = (now - this.TimeStamp).TotalMilliseconds;
-            double num1 = -this.CompassCourse + 90.0;
-            if (num1 <= -180.0)
-                num1 += 360.0;
-            double num2 = num1 * Math.PI / 180.0;
-            XCoordinate += Math.Cos(num2) * (this.HorizontalVelocity * totalMilliseconds / 1000.0);
-            YCoordinate += Math.Sin(num2) * (this.HorizontalVelocity * totalMilliseconds / 1000.0);
-            TimeStamp = now;
-        }
 
     }
 }

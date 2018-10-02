@@ -9,12 +9,12 @@ namespace ATMhandin2.Interfaces
     public interface IAircraft
     {
         string Tag { get; set; }
-        double XCoordinate { get; set; }
-        double YCoordinate { get; set; }
+        int XCoordinate { get; set; }
+        int YCoordinate { get; set; }
         int Altitude { get; set; }
         DateTime TimeStamp { get; set; }
-        double CompassCourse { get; set; }
-        double HorizontalVelocity { get; set; }
+        int CompassCourse { get; set; }
+        int HorizontalVelocity { get; set; }
         void Update(ITransponderDataItem td);
 
         string ToString();
