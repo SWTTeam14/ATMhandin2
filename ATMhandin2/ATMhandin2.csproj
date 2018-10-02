@@ -67,6 +67,7 @@
     <Compile Include="Classes\TransponderDataItem.cs" />
     <Compile Include="Classes\TransponderReceiverClient.cs" />
     <Compile Include="Events\TransponderDataItemEventArgs.cs" />
+    <Compile Include="Interfaces\IAMSController.cs" />
     <Compile Include="Interfaces\IDecoder.cs" />
     <Compile Include="Interfaces\ITransponderDataItem.cs" />
     <Compile Include="Program.cs" />

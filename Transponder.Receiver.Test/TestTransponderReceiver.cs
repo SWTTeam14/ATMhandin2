@@ -14,6 +14,8 @@ namespace Transponder.Receiver.Test
         private ITransponderReceiver _fakeTransponderReceiver;
         private TransponderReceiverClient _uut;
         private IDecoder _fakeDecoder;
+        private IAMSController _fakeAmsController;
+
 
         [SetUp]
         public void Setup()
@@ -23,6 +25,8 @@ namespace Transponder.Receiver.Test
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
 
             _fakeDecoder = Substitute.For<IDecoder>();
+
+            _fakeAmsController = Substitute.For<IAMSController>();
         }
 
 
@@ -50,6 +54,16 @@ namespace Transponder.Receiver.Test
             TransponderDataItem td = _fakeDecoder.convertData(testData);
 
             Assert.That(_fakeDecoder.convertData(testData), Is.EqualTo(td));
+
+            
+        }
+
+
+
+        [Test]
+        public void TestAMSController()
+        {
+            
         }
     }
 }

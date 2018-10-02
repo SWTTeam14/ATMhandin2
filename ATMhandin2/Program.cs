@@ -11,7 +11,7 @@ namespace ATMhandin2
         {
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            var t1 = new Classes.TransponderReceiverClient(receiver);
+            var t1 = new TransponderReceiverClient(receiver);
 
             AMSController amsController = new AMSController(t1);
 

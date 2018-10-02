@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATMhandin2.Events;
+using ATMhandin2.Interfaces;
 
 namespace ATMhandin2.Classes
 {
-    public class AMSController
+    public class AMSController : IAMSController
     {
         public AMSController(TransponderReceiverClient trc)
         {
@@ -18,9 +19,9 @@ namespace ATMhandin2.Classes
             _trc.TransponderDataItemEvent += TrcOnTransponderDataItemEvent;
         }
 
-        private void TrcOnTransponderDataItemEvent(object sender, TransponderDataItemEventArgs e)
+        public void TrcOnTransponderDataItemEvent(object sender, TransponderDataItemEventArgs e)
         {
-            var td = e.TransponderDataItem;
+            TransponderDataItem td = e.TransponderDataItem;
             //Console.WriteLine(e.TransponderDataItem.ToString());
             if (_airspace.IsAircraftInside(e.TransponderDataItem))
             {
