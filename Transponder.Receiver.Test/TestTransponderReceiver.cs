@@ -92,15 +92,15 @@ namespace Transponder.Receiver.Test
 
     public class TestAirspace
     {
-        private IAircraft _fakeAircraft;
+        //private IAircraft _fakeAircraft;
         private Aircraft _uut;
 
         [SetUp]
         public void Setup()
         {
-            _fakeAircraft = Substitute.For<IAircraft>();
+            //_fakeAircraft = Substitute.For<IAircraft>();
 
-            _uut = new Aircraft();
+            _uut = new Aircraft("",1,2,3);
         }
 
 
@@ -108,15 +108,16 @@ namespace Transponder.Receiver.Test
 
     public class TestAircraft
     {
-        private IAirspace _fakeAirspace;
+        //private IAirspace _fakeAirspace;
         private Airspace _uut;
+        private int South, North, West, East, Low, High;
 
         [SetUp]
         public void Setup()
         {
-            _fakeAirspace = Substitute.For<IAirspace>();
+            //_fakeAirspace = Substitute.For<IAirspace>();
 
-            _uut = new Airspace();
+            _uut = new Airspace(10000,10000,90000,90000,500,20000);
         }
 
 
