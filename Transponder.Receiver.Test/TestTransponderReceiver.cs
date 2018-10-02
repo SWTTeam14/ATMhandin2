@@ -41,20 +41,7 @@ namespace Transponder.Receiver.Test
         }
     }
 
-    public class TestTransponderDataItem
-    {
-        private ITransponderDataItem _fakeTdItem;
-        private TransponderDataItem _uut;
-
-
-        [SetUp]
-        public void Setup()
-        {
-            _fakeTdItem = Substitute.For<ITransponderDataItem>();
-
-            _uut = new TransponderDataItem();
-        }
-
+    
         //[Test]
         //public void TestTostring()
         //{
@@ -140,24 +127,49 @@ namespace Transponder.Receiver.Test
 
                 Assert.That(_uut.IsAircraftInside(td), Is.False);
             }
-
-
         }
 
         public class TestAircraft
         {
-            //private IAirspace _fakeAirspace;
-            private Airspace _uut;
-            private int South, North, West, East, Low, High;
-
+            private IAircraft _fakeAircraft;
+            private Aircraft _uut;
+            private string Tag = "MUH120";
+            private int Xcoor = 32000, Ycoor = 70000, Altitude = 2500;
+            
             [SetUp]
             public void Setup()
             {
-                //_fakeAirspace = Substitute.For<IAirspace>();
+                _fakeAircraft = Substitute.For<IAircraft>();
 
-                _uut = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
+                _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude);
             }
 
+            [Test]
+            public void TestToString()
+            {
+                string TestString =
+                    ("Tag:\t\tMUH120\nX coordinate:\t32000 meters\nY coordinate:\t70000 meters\nAltitude:\t2500 meters\nTimestamp:\tjanuar 01, 0001 00:00:00 000\n");
+
+                Assert.That(_uut.ToString(), Is.EqualTo(TestString));
+            }
+
+            [Test]
+            public void TestUpdate()
+            {
+                string TestString =
+                    ("Tag:\t\tMUH120\nX coordinate:\t15000 meters\nY coordinate:\t20000 meters\nAltitude:\t700 meters\nTimestamp:\tjuli 09, 2018 20:40:10 902\n");
+
+                ITransponderDataItem td = new TransponderDataItem();
+                
+                td.XCoordinate = 15000;
+                td.YCoordinate = 20000;
+                td.Altitude = 700;
+                td.TimeStamp = new DateTime(2018,07,09,20,40,10,902);
+
+                _uut.Update(td);
+                
+                Assert.That(_uut.ToString(), Is.EqualTo(TestString));
+            }
 
         }
 
@@ -178,6 +190,38 @@ namespace Transponder.Receiver.Test
 
         }
 
+        public class TestTransponderDataItem
+        {
+            private ITransponderDataItem _fakeTransponderDataItem;
+            private TransponderDataItem _uut;
+
+            [SetUp]
+            public void Setup()
+            {
+                _fakeTransponderDataItem = Substitute.For<ITransponderDataItem>();
+
+                _uut = new TransponderDataItem();
+
+                _uut.Tag = "MUH120";
+                _uut.XCoordinate = 15000;
+                _uut.YCoordinate = 20000;
+                _uut.Altitude = 700;
+                _uut.TimeStamp = new DateTime(2018, 07, 09, 20, 40, 10, 902);
+            }
+
+            [Test]
+            public void TestToString()
+            {
+            string TestString =
+                ("Tag:\t\tMUH120\nX coordinate:\t15000 meters\nY coordinate:\t20000 meters\nAltitude:\t700 meters\nTimestamp:\tjuli 09, 2018 20:40:10 902\n");
+
+            Assert.That(_uut.ToString(), Is.EqualTo(TestString));
+        }
+            
+
+
+        }
+
         //public class TestMonitor
         //{
         //    private IMonitor;
@@ -188,5 +232,5 @@ namespace Transponder.Receiver.Test
         //
         //
         //}
-    }
+    
 }
