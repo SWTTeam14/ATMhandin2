@@ -5,14 +5,14 @@ namespace ATMhandin2.Classes
 {
     public class Aircraft : IAircraft
     {
-        public Aircraft(string tag, int xCoordinate, int yCoordinate, int altitude, double compassCourse)
+        public Aircraft(string tag, int xCoordinate, int yCoordinate, int altitude /*, double compassCourse*/)
         {
             Tag = tag;
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
             Altitude = altitude;
             this.TimeStamp = DateTime.Now;
-            CompassCourse = compassCourse;
+            //CompassCourse = compassCourse;
 
         }
 

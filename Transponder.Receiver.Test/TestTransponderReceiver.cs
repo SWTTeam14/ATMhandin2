@@ -141,7 +141,7 @@ namespace Transponder.Receiver.Test
             {
                 _fakeAircraft = Substitute.For<IAircraft>();
 
-                _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude,1);
+                _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude);
             }
 
             [Test]
@@ -206,13 +206,16 @@ namespace Transponder.Receiver.Test
                 
                 Assert.That(_uut._aircraftsInsideAirspace.Count, Is.EqualTo(3));
                 
-
+                // Updating the coordinates for the plane so that it is now out of the airspace.
                 testData[0] = "ATR423;91000;12932;14000;20151006213456789";
                 _fakeTransponderReceiver.TransponderDataReady +=
                     Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
                 Assert.That(_uut._aircraftsInsideAirspace.Count, Is.EqualTo(2));
             }
+            
+            
+
 
         }
 
