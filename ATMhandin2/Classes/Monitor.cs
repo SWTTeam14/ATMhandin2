@@ -33,10 +33,9 @@ namespace ATMhandin2.Classes
                     double diffLongtitude = longTitude(AircraftsInsideAirspace[i].XCoordinate, aircraft.XCoordinate,
                         AircraftsInsideAirspace[i].YCoordinate, aircraft.YCoordinate);
 
-
                     if (diffAltitude < 300 && diffLongtitude < 5000)
                     {
-                        Console.WriteLine(" WARNING!!!! devert course");
+                        Console.WriteLine(" WARNING!!!! divert course");
                         // Få fly til at ændre retning. 
                     }
                 }

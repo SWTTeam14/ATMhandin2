@@ -9,9 +9,8 @@ namespace ATMhandin2.Interfaces
 {
     public interface IDecoder
     {
-        //Classes.SpecifikAircraft ConvertDataToAircraft(string data);
+        Classes.SpecifikAircraft ConvertDataToAircraft(string data);
         string convertData(string[] data);
-
         DateTime convertTime(string [] data);
 
     }

@@ -10,14 +10,14 @@ namespace ATMhandin2.Classes
 {
     public class Decoder : IDecoder
     {
-        public List<SpecifikAircraft> Aircrafts;
+       public List<SpecifikAircraft> Aircrafts;
 
-        public Decoder( )
+        public Decoder()
         {
             Aircrafts = new List<SpecifikAircraft>();
         }
 
-       public  SpecifikAircraft ConvertDataToAircraft(string data)
+       public SpecifikAircraft ConvertDataToAircraft(string data)
         {
             string[] tokens;
             char[] seperators = { ';' };
@@ -39,8 +39,7 @@ namespace ATMhandin2.Classes
 
             return bla;
         }
-
-
+        
         public string convertData(string[] data)
         {
 
