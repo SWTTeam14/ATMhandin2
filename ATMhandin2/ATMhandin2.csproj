@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Classes\Airspace.cs" />
     <Compile Include="Classes\AMSController.cs" />
+    <Compile Include="Classes\CoalitionAvoidanceSystem.cs" />
     <Compile Include="Classes\Decoder.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Aircraft.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Interfaces\IAircraft.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
     <Compile Include="Interfaces\IAMSController.cs" />
+    <Compile Include="Interfaces\ICoalitionAvoidanceSystem.cs" />
     <Compile Include="Interfaces\IDecoder.cs" />
     <Compile Include="Interfaces\ITransponderDataItem.cs" />
     <Compile Include="Program.cs" />

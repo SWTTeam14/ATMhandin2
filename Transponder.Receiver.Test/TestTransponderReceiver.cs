@@ -41,36 +41,7 @@ namespace Transponder.Receiver.Test
         }
     }
 
-    
-        //[Test]
-        //public void TestTostring()
-        //{
-        //    string TestString =
-        //        "Tag:\t\tATR423\nX coordinate:\t39045 meters\nY coordinate:\t12932 meters\nAltitude:\t14000 meters\nTimestamp:\tJune 10, 2015 21:34:56 789\n";
-        //    string testData = "ATR423;39045;12932;14000;20151006213456789";
-
-        //   ITransponderDataItem  _fakeTdItem = _fakeDecoder.convertData(testData);
-
-
-        //    Assert.That(TestString, Is.EqualTo(_fakeTdItem.ToString()));
-        //    //Assert.AreSame(TestString, _fakeTdItem.ToString());
-        //    //StringAssert.AreEqualIgnoringCase(TestString, _fakeTdItem.ToString());
-        //}
-
-
-
-
-        //[TestCase()]
-        //public void TestUpdateAircraftPosition(int a, int b, int c)
-        //{
-
-        //    ITransponderDataItem td = new TransponderDataItem()
-        //        {Altitude = a, Tag = "", TimeStamp = , XCoordinate = b, YCoordinate = c};
-
-        //    _fakeAircraft.Update(td);
-        //}
-
-        public class TestDecoder
+    public class TestDecoder
         {
             private IDecoder _fakeDecoder;
             private Decoder _uut;
@@ -94,7 +65,7 @@ namespace Transponder.Receiver.Test
             }
         }
 
-        public class TestAirspace
+    public class TestAirspace
         {
             private Airspace _uut;
 
@@ -129,7 +100,7 @@ namespace Transponder.Receiver.Test
             }
         }
 
-        public class TestAircraft
+    public class TestAircraft
         {
             private IAircraft _fakeAircraft;
             private Aircraft _uut;
@@ -173,7 +144,7 @@ namespace Transponder.Receiver.Test
 
         }
 
-        public class TestAMSController
+    public class TestAMSController
         {
             private IAMSController _fakeAmsController;
             private TransponderReceiverClient trc;
@@ -213,10 +184,9 @@ namespace Transponder.Receiver.Test
 
                 Assert.That(_uut._aircraftsInsideAirspace.Count, Is.EqualTo(2));
             }
-
         }
 
-        public class TestTransponderDataItem
+    public class TestTransponderDataItem
         {
             private ITransponderDataItem _fakeTransponderDataItem;
             private TransponderDataItem _uut;
@@ -247,16 +217,5 @@ namespace Transponder.Receiver.Test
 
 
         }
-
-        //public class TestMonitor
-        //{
-        //    private IMonitor;
-        //    private 
-        //
-        //    [SetUp]
-        //    public void Setup() { }
-        //
-        //
-        //}
     
 }

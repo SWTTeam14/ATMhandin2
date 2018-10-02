@@ -10,6 +10,8 @@ namespace ATMhandin2.Classes
 {
     public class AMSController : IAMSController
     {
+        
+
         public AMSController(TransponderReceiverClient trc)
         {
             _airspace = new Airspace(10000, 10000, 90000, 90000, 500, 20000);
@@ -17,6 +19,8 @@ namespace ATMhandin2.Classes
 
             //Subscribe to transponderreceiverclient 
             _trc.TransponderDataItemEvent += TrcOnTransponderDataItemEvent;
+            
+
         }
 
         public void TrcOnTransponderDataItemEvent(object sender, TransponderDataItemEventArgs e)
@@ -52,9 +56,10 @@ namespace ATMhandin2.Classes
             foreach (KeyValuePair<string, Aircraft> entry in _aircraftsInsideAirspace)
             {
                 Console.WriteLine(entry.Value.ToString());;
+
             }
         }
-
+        
         //This attribute could be changed to a list, så that events can be received from multiple responderreceiverclient
         private TransponderReceiverClient _trc;
         public Dictionary<string, Aircraft> _aircraftsInsideAirspace = new Dictionary<string, Aircraft>(); 

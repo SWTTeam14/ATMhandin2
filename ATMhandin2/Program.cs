@@ -14,12 +14,14 @@ namespace ATMhandin2
             var t1 = new TransponderReceiverClient(receiver);
 
             AMSController amsController = new AMSController(t1);
+            CoalitionAvoidanceSystem cas = new CoalitionAvoidanceSystem(amsController);
 
             while (true)
             {
                 Thread.Sleep(1000);
                 Console.Clear();
                 amsController.Print();
+                cas.CoalitionWarning();
             }
         }
     }
