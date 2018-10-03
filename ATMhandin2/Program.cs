@@ -22,6 +22,7 @@ namespace ATMhandin2
                 Console.Clear();
                 amsController.Print();
                 cas.CoalitionWarning();
+                //cas.Seperate();
             }
         }
     }

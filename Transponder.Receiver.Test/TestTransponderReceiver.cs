@@ -136,7 +136,7 @@ namespace Transponder.Receiver.Test
                 td.YCoordinate = 20000;
                 td.Altitude = 700;
                 td.TimeStamp = new DateTime(2018,07,09,20,40,10,902);
-
+                
                 _uut.Update(td);
                 
                 Assert.That(_uut.ToString(), Is.EqualTo(TestString));
