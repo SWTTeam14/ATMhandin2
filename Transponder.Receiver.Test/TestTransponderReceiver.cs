@@ -143,17 +143,19 @@ namespace Transponder.Receiver.Test
                 Assert.That(_uut.ToString(), Is.EqualTo(TestString));
             }
 
-            [TestCase(10000,12000,50000,55000, 21.8014094863518117702448660869436645)]
-            [TestCase(90000,90000,90000,55000, 21.8014094863518117702448660869436645)]
-            public void TestCalculateAngle(double a, double b, double c, double d, double e)
+            [TestCase(0,2,0,1, 63.4349488)]
+            [TestCase(0,2,0,-1, 180 - 63.4349488)]
+            [TestCase(0,-2,0,-1, 180 + 63.4349488)]
+            [TestCase(0,-2,0, 1, (180 - 63.4349488) + 180 )]
+            public void TestCalculateAngle(double x1, double x2, double y1, double y2, double angle)
             {
-                Assert.That(_uut.CalculateAngle(a,b,c,d), Is.EqualTo(e));
+                Assert.That(_uut.CalculateAngle(x1,x2,y1,y2), Is.InRange(angle-0.1, angle+0.1));
             }
 
             [TestCase()]
-            public void TestCalculateVelocity(double a, double b, double c, double d, double e, DateTime timestamp1, DateTime timestamp2)
+            public void TestCalculateVelocity(int x1, int x2, int y1, int y2, DateTime timestamp1, DateTime timestamp2, double velocity)
             {
-
+                Assert.That(_uut.CalculateVelocity(x1, x2, y1, y2, timestamp1, timestamp2), Is.EqualTo(velocity));
             }
 
         }
