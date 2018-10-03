@@ -119,8 +119,8 @@ namespace Transponder.Receiver.Test
             public void TestToString()
             {
                 string TestString =
-                    ("Tag:\t\tMUH120\nX coordinate:\t32000 meters\nY coordinate:\t70000 meters\nAltitude:\t2500 meters\nTimestamp:\tjanuar 01, 0001 00:00:00 000\n");
-
+                    ("Tag:\t\t\tMUH120\nX coordinate:\t\t32000 meters\nY coordinate:\t\t70000 meters\nAltitude:\t\t2500 meters\nTimestamp:\t\tjanuar 01, 0001 00:00:00 000\nCompassCourse:\t\t0\nHorizontalVelocity:\t0\n");
+            
                 Assert.That(_uut.ToString(), Is.EqualTo(TestString));
             }
 
@@ -128,8 +128,8 @@ namespace Transponder.Receiver.Test
             public void TestUpdate()
             {
                 string TestString =
-                    ("Tag:\t\tMUH120\nX coordinate:\t15000 meters\nY coordinate:\t20000 meters\nAltitude:\t700 meters\nTimestamp:\tjuli 09, 2018 20:40:10 902\n");
-
+                    ("Tag:\t\t\tMUH120\nX coordinate:\t\t15000 meters\nY coordinate:\t\t20000 meters\nAltitude:\t\t700 meters\nTimestamp:\t\tjuli 09, 2018 20:40:10 902\nCompassCourse:\t\t18\nHorizontalVelocity:\t0\n");
+                
                 ITransponderDataItem td = new TransponderDataItem();
                 
                 td.XCoordinate = 15000;
