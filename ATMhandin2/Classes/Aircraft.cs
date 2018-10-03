@@ -34,7 +34,7 @@ namespace ATMhandin2.Classes
             return velocity;
         }
 
-        public double CalculateAngle(int xcor1, int xcor2, int ycor1, int ycor2)
+        public double CalculateAngle(double xcor1, double xcor2, double ycor1, double ycor2)
         {
             double xdiff = xcor1 - xcor2;
             double ydiff = ycor1 - ycor2;
@@ -67,7 +67,7 @@ namespace ATMhandin2.Classes
 
 
             // Calculating angle
-            //double angle = Math.Atan(xdiff / ydiff) * 180 / Math.PI;
+            //double angle = Math.Atan(xdiff / ydiff) * 180 / .thMath.PI;
 
             //if (xdiff > 0 && ydiff > 0)
             //{

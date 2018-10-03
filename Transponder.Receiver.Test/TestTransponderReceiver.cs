@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using ATMhandin2.Classes;
 using ATMhandin2.Interfaces;
@@ -141,8 +142,19 @@ namespace Transponder.Receiver.Test
                 
                 Assert.That(_uut.ToString(), Is.EqualTo(TestString));
             }
-            
-      
+
+            [TestCase(10000,12000,50000,55000, 21.8014094863518117702448660869436645)]
+            [TestCase(90000,90000,90000,55000, 21.8014094863518117702448660869436645)]
+            public void TestCalculateAngle(double a, double b, double c, double d, double e)
+            {
+                Assert.That(_uut.CalculateAngle(a,b,c,d), Is.EqualTo(e));
+            }
+
+            [TestCase()]
+            public void TestCalculateVelocity(double a, double b, double c, double d, double e, DateTime timestamp1, DateTime timestamp2)
+            {
+
+            }
 
         }
 
