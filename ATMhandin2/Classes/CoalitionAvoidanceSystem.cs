@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ATMhandin2.Interfaces;
 
 namespace ATMhandin2.Classes
 {
@@ -31,7 +28,8 @@ namespace ATMhandin2.Classes
             {
                 for (int j = i+1; j < _aircraftsInAirspace.Values.Count; j++)
                 {
-                    int diffAltitude = _aircraftsInAirspace.ElementAt(i).Value.Altitude - _aircraftsInAirspace.ElementAt(j).Value.Altitude;
+                    int diffAltitude = calculateAltitudeDiff(_aircraftsInAirspace.ElementAt(i).Value.Altitude,
+                        _aircraftsInAirspace.ElementAt(j).Value.Altitude);
 
                     double diffLongtitude = distanceTo(
                         _aircraftsInAirspace.ElementAt(i).Value.XCoordinate,
@@ -39,7 +37,7 @@ namespace ATMhandin2.Classes
                         _aircraftsInAirspace.ElementAt(i).Value.YCoordinate,
                         _aircraftsInAirspace.ElementAt(j).Value.YCoordinate);
 
-                    if (diffAltitude < 300 && diffLongtitude < 5000)
+                    if (diffAltitude <= 300 && diffLongtitude <= 5000)
                     {
                         _tmpAircraft = _aircraftsInAirspace.ElementAt(i).Value;
                         _tmpAircraftToCompare = _aircraftsInAirspace.ElementAt(j).Value;
@@ -73,5 +71,19 @@ namespace ATMhandin2.Classes
 
             return longtitude;
         }
+
+        public int calculateAltitudeDiff(int alti1, int alti2)
+        {
+            int diffAlti;
+
+            if (alti1 > alti2)
+            {
+                diffAlti = alti1 - alti2;
+                return diffAlti;
+            }
+            diffAlti = alti2 - alti1;
+            return diffAlti;
+        }
+        
     }
 }

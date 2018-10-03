@@ -153,7 +153,7 @@ namespace Transponder.Receiver.Test
             [TestCase()]
             public void TestCalculateVelocity(double a, double b, double c, double d, double e, DateTime timestamp1, DateTime timestamp2)
             {
-
+                
             }
 
         }
@@ -198,10 +198,6 @@ namespace Transponder.Receiver.Test
 
                 Assert.That(_uut._aircraftsInsideAirspace.Count, Is.EqualTo(2));
             }
-            
-            
-
-
         }
 
     public class TestTransponderDataItem
@@ -255,11 +251,25 @@ namespace Transponder.Receiver.Test
             _uut = new CoalitionAvoidanceSystem(_amsController);
         }
 
-        [Test]
-        public void TestCoalitionWarningTrue()
+        [TestCase(11944, 43486, 12510, 45348)]
+        public void TestDistanceCalculation(double x1Coor, double y1Coor, double x2Coor, double y2Coor)
         {
-            Aircraft air1 = new Aircraft("MUH120", 15000, 15000, 700);
-            Aircraft air2 = new Aircraft("LAK340", 17000, 17000, 800);
+            double CalculatedDistance = _uut.distanceTo(x1Coor, x2Coor, y1Coor, y2Coor);
+ 
+            Assert.That(CalculatedDistance, Is.EqualTo(1946.124353683494707425007744333489429246012287529387513188));
+        }
+
+        [TestCase("MUH120", 11944, 43486, 12200,"LAK340", 12510, 45348, 12500)]
+        [TestCase("MUH120", 11944, 43486, 12200,"LAK340", 12510, 45348, 12200)]
+        [TestCase("MUH120", 11944, 43486, 12200,"LAK340", 12510, 45348, 11900)]
+        [TestCase("MUH120", 11944, 43486, 12200,"LAK340", 12510, 45348, 12000)]
+        [TestCase("MUH120", 10000, 13000, 12200, "LAK340", 10000, 14000, 12200)]
+        [TestCase("MUH120", 10000, 14000, 12200, "LAK340", 10000, 13000, 12200)]
+        [TestCase("MUH120", 15000, 15000, 12200, "LAK340", 13000, 13000, 12300)]
+        public void TestCoalitionWarningTrue(string a, int b, int c, int d, string e, int f, int g, int h)
+        {
+            Aircraft air1 = new Aircraft(a, b, c, d);
+            Aircraft air2 = new Aircraft(e, f, g, h);
 
             _amsController._aircraftsInsideAirspace.Add("1", air1);
             _amsController._aircraftsInsideAirspace.Add("2", air2);
