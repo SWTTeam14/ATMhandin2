@@ -63,7 +63,6 @@
     <Compile Include="Classes\AMSController.cs" />
     <Compile Include="Classes\CoalitionAvoidanceSystem.cs" />
     <Compile Include="Classes\Decoder.cs" />
-    <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Aircraft.cs" />
     <Compile Include="Classes\TransponderDataItem.cs" />
     <Compile Include="Classes\TransponderReceiverClient.cs" />
