@@ -54,7 +54,9 @@ namespace ATMhandin2.Classes
 
                         sw.Close();
                         fs.Close();
-                        
+
+                        Console.WriteLine("WARNING!!!! {0}, you are on a coalition course with {1}. At: {2}. Divert course!", _aircraftsInAirspace.ElementAt(i).Value.Tag, _aircraftsInAirspace.ElementAt(j).Value.Tag, _aircraftsInAirspace.ElementAt(i).Value.TimeStamp);
+
                         return true;
                     }
                 }
