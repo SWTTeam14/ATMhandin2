@@ -23,15 +23,7 @@ namespace ATMhandin2.Classes
             _aircraftsInAirspace = _amsController._aircraftsInsideAirspace;
             
         }
-
-        public void Seperate()
-        {
-            if (CoalitionWarning())
-            {
-                
-            }
-        }
-
+        
         public bool CoalitionWarning()
         {
 
@@ -55,9 +47,7 @@ namespace ATMhandin2.Classes
                         FileStream fs = new FileStream(@"C:\Users\Public\TestFolder\WriteLines.txt", FileMode.OpenOrCreate, FileAccess.Write);
                         StreamWriter sw = new StreamWriter(fs);
                         TextWriter tw = Console.Out;
-
-                        Console.Clear();
-
+                        
                         Console.SetOut(sw);
                         Console.WriteLine("WARNING!!!! {0}, you are on a coalition course with {1}. At: {2}. Divert course!", _aircraftsInAirspace.ElementAt(i).Value.Tag, _aircraftsInAirspace.ElementAt(j).Value.Tag, _aircraftsInAirspace.ElementAt(i).Value.TimeStamp);
                         Console.SetOut(tw);

@@ -241,27 +241,29 @@ namespace Transponder.Receiver.Test
         //private ITransponderDataItem _fakeTransponderDataItem;
         private CoalitionAvoidanceSystem _uut;
         private AMSController _amsController;
+        private ITransponderReceiver _fakeTransponderReceiver;
         
         [SetUp]
         public void Setup()
         {
             //_fakeTransponderDataItem = Substitute.For<ITransponderDataItem>();
 
-            Aircraft air1 = new Aircraft("MUH120", 15000, 15000, 700);
-            Aircraft air2 = new Aircraft("LAK340", 17000, 17000, 800);
+            _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
             
-            _amsController = new AMSController(new );
-
-            _amsController._aircraftsInsideAirspace.Add("1", air1);
-            _amsController._aircraftsInsideAirspace.Add("2", air2);
-
+            _amsController = new AMSController(new TransponderReceiverClient(_fakeTransponderReceiver));
+            
             _uut = new CoalitionAvoidanceSystem(_amsController);
         }
 
         [Test]
         public void TestCoalitionWarningTrue()
         {
-            
+            Aircraft air1 = new Aircraft("MUH120", 15000, 15000, 700);
+            Aircraft air2 = new Aircraft("LAK340", 17000, 17000, 800);
+
+            _amsController._aircraftsInsideAirspace.Add("1", air1);
+            _amsController._aircraftsInsideAirspace.Add("2", air2);
+
             Assert.That(_uut.CoalitionWarning(), Is.EqualTo(true));
 
         }
@@ -269,7 +271,13 @@ namespace Transponder.Receiver.Test
         [Test]
         public void TestCoalitionWarningFalse()
         {
+            Aircraft air1 = new Aircraft("MUH120", 15000, 15000, 700);
+            Aircraft air2 = new Aircraft("LAK340", 77000, 77000, 2800);
 
+            _amsController._aircraftsInsideAirspace.Add("1", air1);
+            _amsController._aircraftsInsideAirspace.Add("2", air2);
+
+            Assert.That(_uut.CoalitionWarning(), Is.EqualTo(false));
 
         }
     }
