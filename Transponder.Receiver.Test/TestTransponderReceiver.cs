@@ -217,10 +217,47 @@ namespace Transponder.Receiver.Test
                 ("Tag:\t\tMUH120\nX coordinate:\t15000 meters\nY coordinate:\t20000 meters\nAltitude:\t700 meters\nTimestamp:\tjuli 09, 2018 20:40:10 902\n");
 
             Assert.That(_uut.ToString(), Is.EqualTo(TestString));
-        }
+            }
             
 
 
         }
-    
+
+    public class TestCoalitionAvoidanceSystem
+    {
+        //private ITransponderDataItem _fakeTransponderDataItem;
+        private CoalitionAvoidanceSystem _uut;
+        private AMSController _amsController;
+        
+        [SetUp]
+        public void Setup()
+        {
+            //_fakeTransponderDataItem = Substitute.For<ITransponderDataItem>();
+
+            Aircraft air1 = new Aircraft("MUH120", 15000, 15000, 700);
+            Aircraft air2 = new Aircraft("LAK340", 17000, 17000, 800);
+            
+            _amsController = new AMSController(new );
+
+            _amsController._aircraftsInsideAirspace.Add("1", air1);
+            _amsController._aircraftsInsideAirspace.Add("2", air2);
+
+            _uut = new CoalitionAvoidanceSystem(_amsController);
+        }
+
+        [Test]
+        public void TestCoalitionWarningTrue()
+        {
+            
+            Assert.That(_uut.CoalitionWarning(), Is.EqualTo(true));
+
+        }
+
+        [Test]
+        public void TestCoalitionWarningFalse()
+        {
+
+
+        }
+    }
 }

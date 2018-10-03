@@ -21,8 +21,7 @@ namespace ATMhandin2.Classes
 
             Receiver.TransponderDataReady += ReceiverTransponderDataReady;
         }
-
-
+        
         private void ReceiverTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
 

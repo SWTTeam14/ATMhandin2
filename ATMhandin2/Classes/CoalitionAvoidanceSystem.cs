@@ -60,11 +60,11 @@ namespace ATMhandin2.Classes
 
                         Console.SetOut(sw);
                         Console.WriteLine("WARNING!!!! {0}, you are on a coalition course with {1}. At: {2}. Divert course!", _aircraftsInAirspace.ElementAt(i).Value.Tag, _aircraftsInAirspace.ElementAt(j).Value.Tag, _aircraftsInAirspace.ElementAt(i).Value.TimeStamp);
+                        Console.SetOut(tw);
 
+                        sw.Close();
+                        fs.Close();
                         
-
-
-
                         return true;
                     }
                 }
