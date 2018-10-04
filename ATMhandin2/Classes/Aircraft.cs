@@ -21,27 +21,26 @@ namespace ATMhandin2.Classes
         public int CompassCourse { get; set; }
         public int HorizontalVelocity { get; set; }
 
-        public double CalculateVelocity(int xcor1, int xcor2, int ycor1, int ycor2, DateTime Timestamp1, DateTime Timestamp2)
+        public double CalculateVelocity(int xcoor1, int xcoor2, int ycoor1, int ycoor2, DateTime timestamp1, DateTime timestamp2)
         {
-            double velocity = 0;
+            double xdiff = xcoor2 - xcoor1;
+            double ydiff = ycoor2 - ycoor1;
 
-            double xdiff = xcor1 - xcor2;
-            double ydiff = ycor1 - ycor2;
             double distance = Math.Sqrt(Math.Pow(xdiff, 2) + Math.Pow(ydiff, 2));
 
-            velocity = (int)(distance / (Timestamp1 - Timestamp2).TotalSeconds);
+            double velocity = (int)(distance / (timestamp2 - timestamp1).TotalSeconds);
 
             return velocity;
         }
 
-        public double CalculateAngle(double xcor1, double xcor2, double ycor1, double ycor2)
+        public double CalculateAngle(double xcoor1, double xcoor2, double ycoor1, double ycoor2)
         {
-            double xdiff = xcor1 - xcor2;
-            double ydiff = ycor1 - ycor2;
+            double xdiff = xcoor2 - xcoor1;
+            double ydiff = ycoor2 - ycoor1;
 
             double angle = Math.Atan(xdiff / ydiff) * 180 / Math.PI;
 
-            if (xdiff > 0 && ydiff > 0)
+            if (ydiff < 0)
             {
                 angle += 180;
             }
@@ -49,36 +48,15 @@ namespace ATMhandin2.Classes
             {
                 angle += 360;
             }
-
-            return angle;
+           return angle;
         }
 
         public void Update(ITransponderDataItem td)
         {
-
             //Calculating velocity
-            HorizontalVelocity = (int)CalculateVelocity(td.XCoordinate, XCoordinate, td.YCoordinate, YCoordinate, td.TimeStamp, TimeStamp);
+            HorizontalVelocity = (int)CalculateVelocity(XCoordinate, td.XCoordinate, YCoordinate, td.YCoordinate, TimeStamp, td.TimeStamp);
 
-            //double xdiff = td.XCoordinate - XCoordinate;
-            //double ydiff = td.YCoordinate - YCoordinate;
-            //double distance = Math.Sqrt(Math.Pow(xdiff, 2) + Math.Pow(ydiff, 2));
-
-            //HorizontalVelocity = (int) (distance / (td.TimeStamp - TimeStamp).TotalSeconds);
-
-
-            // Calculating angle
-            //double angle = Math.Atan(xdiff / ydiff) * 180 / .thMath.PI;
-
-            //if (xdiff > 0 && ydiff > 0)
-            //{
-            //    angle += 180;
-            //}
-            //else if (xdiff < 0 && ydiff > 0)
-            //{
-            //    angle += 360;
-            //}
-
-            CompassCourse = (int) CalculateAngle(td.XCoordinate, XCoordinate, td.YCoordinate, YCoordinate); 
+            CompassCourse = (int) CalculateAngle(XCoordinate, td.XCoordinate, YCoordinate, td.YCoordinate); 
 
             XCoordinate = td.XCoordinate;
             YCoordinate = td.YCoordinate;

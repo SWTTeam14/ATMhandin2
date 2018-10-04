@@ -70,7 +70,6 @@
     <Compile Include="Interfaces\IAircraft.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
     <Compile Include="Interfaces\IAMSController.cs" />
-    <Compile Include="Interfaces\ICoalitionAvoidanceSystem.cs" />
     <Compile Include="Interfaces\IDecoder.cs" />
     <Compile Include="Interfaces\ITransponderDataItem.cs" />
     <Compile Include="Program.cs" />

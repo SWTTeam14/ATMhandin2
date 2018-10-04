@@ -42,7 +42,7 @@ namespace ATMhandin2.Classes
                         _tmpAircraft = _aircraftsInAirspace.ElementAt(i).Value;
                         _tmpAircraftToCompare = _aircraftsInAirspace.ElementAt(j).Value;
 
-                        FileStream fs = new FileStream(@"C:\Users\Public\TestFolder\WriteLines.txt", FileMode.OpenOrCreate, FileAccess.Write);
+                        FileStream fs = new FileStream(@"WriteLines.txt", FileMode.OpenOrCreate, FileAccess.Write);
                         StreamWriter sw = new StreamWriter(fs);
                         TextWriter tw = Console.Out;
                         
