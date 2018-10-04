@@ -132,7 +132,7 @@ namespace Transponder.Receiver.Test
             public void TestUpdate()
             {
                 string TestString =
-                    ("Tag:\t\t\tMUH120\nX coordinate:\t\t15000 meters\nY coordinate:\t\t20000 meters\nAltitude:\t\t700 meters\nTimestamp:\t\tjuli 09, 2018 20:40:10 902\nCompassCourse:\t\t18\nHorizontalVelocity:\t0\n");
+                    ("Tag:\t\t\tMUH120\nX coordinate:\t\t15000 meters\nY coordinate:\t\t20000 meters\nAltitude:\t\t700 meters\nTimestamp:\t\tjuli 09, 2018 20:40:10 902\nCompassCourse:\t\t198\nHorizontalVelocity:\t0\n");
                 
                 ITransponderDataItem td = new TransponderDataItem();
                 
@@ -163,7 +163,7 @@ namespace Transponder.Receiver.Test
                 tmpTime1 = new DateTime(2018, 07, 09, 20, 40, 10, 902);
                 tmpTime2 = new DateTime(2018, 07, 09, 20, 40, 20, 902);
             
-                Assert.That(_uut.CalculateVelocity(a,b,c,d,tmpTime1,tmpTime2), Is.EqualTo(-538.0));
+                Assert.That(_uut.CalculateVelocity(a,b,c,d,tmpTime1,tmpTime2), Is.EqualTo(538.0));
 
             }
 
