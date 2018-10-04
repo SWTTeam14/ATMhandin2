@@ -22,6 +22,7 @@ namespace ATMhandin2.Classes
             return td;
         }
 
+        //Hjælpe funktion
         private DateTime convertTime(string data)
         {
 

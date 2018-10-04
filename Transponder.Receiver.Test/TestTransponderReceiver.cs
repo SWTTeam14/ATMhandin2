@@ -107,6 +107,8 @@ namespace Transponder.Receiver.Test
             private Aircraft _uut;
             private string Tag = "MUH120";
             private int Xcoor = 32000, Ycoor = 70000, Altitude = 2500;
+            private DateTime tmpTime1;
+            private DateTime tmpTime2;
             
             [SetUp]
             public void Setup()
@@ -114,6 +116,7 @@ namespace Transponder.Receiver.Test
                 _fakeAircraft = Substitute.For<IAircraft>();
 
                 _uut = new Aircraft(Tag, Xcoor, Ycoor, Altitude);
+            
             }
 
             [Test]
@@ -150,10 +153,16 @@ namespace Transponder.Receiver.Test
                 Assert.That(_uut.CalculateAngle(a,b,c,d), Is.EqualTo(e));
             }
 
-            [TestCase()]
-            public void TestCalculateVelocity(double a, double b, double c, double d, double e, DateTime timestamp1, DateTime timestamp2)
+        
+
+            [TestCase(14000,12000,57000,52000)]
+            public void TestCalculateVelocity(int a, int b, int c, int d)
             {
-                
+                tmpTime1 = new DateTime(2018, 07, 09, 20, 40, 10, 902);
+                tmpTime2 = new DateTime(2018, 07, 09, 20, 40, 20, 902);
+            
+                Assert.That(_uut.CalculateVelocity(a,b,c,d,tmpTime1,tmpTime2), Is.EqualTo(-538.0));
+
             }
 
         }
@@ -208,7 +217,7 @@ namespace Transponder.Receiver.Test
             [SetUp]
             public void Setup()
             {
-                _fakeTransponderDataItem = Substitute.For<ITransponderDataItem>();
+                //_fakeTransponderDataItem = Substitute.For<ITransponderDataItem>();
 
                 _uut = new TransponderDataItem();
 
